@@ -24,7 +24,7 @@ final readonly class App
         $this->bootstrap();
     }
 
-    public function run(string $inputFilePath): void
+    public function calculateCommissions(string $inputFilePath): array
     {
         $reader = $this->container->make(TransactionDataFileInputReader::class);
         $transactions = $reader->getTransactions($inputFilePath);
@@ -35,7 +35,7 @@ final readonly class App
             $commissions[] = $commissionCalculator->calculate($transaction);
         }
 
-        var_dump($commissions);
+        return $commissions;
     }
 
     public function bootstrap(): void

@@ -9,4 +9,6 @@ $app = new App(
     new AppContainer()
 );
 
-$app->run(__DIR__ . '/resources/input.txt');
+$commissions = $app->calculateCommissions(__DIR__ . '/resources/input.txt');
+
+var_dump($commissions);
