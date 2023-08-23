@@ -1,12 +1,12 @@
 <?php
 
 use Bokoch\CommissionCalculator\App;
-use Bokoch\CommissionCalculator\AppContainer;
+use Bokoch\CommissionCalculator\SimpleContainer;
 
 require_once 'vendor/autoload.php';
 
 $app = new App(
-    new AppContainer()
+    new SimpleContainer()
 );
 
 $inputFilePath = $argv[1] ?? null;

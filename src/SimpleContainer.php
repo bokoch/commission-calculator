@@ -7,7 +7,7 @@ namespace Bokoch\CommissionCalculator;
 use Bokoch\CommissionCalculator\Exceptions\ClassNotFoundContainerException;
 use Closure;
 
-final class AppContainer implements Container
+final class SimpleContainer implements Container
 {
     /**
      * @var array<class-string, Closure(Container $container): void>
