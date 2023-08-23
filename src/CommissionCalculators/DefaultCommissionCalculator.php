@@ -7,7 +7,7 @@ use Bokoch\CommissionCalculator\CurrencyExchangeRateProviders\CurrencyExchangeRa
 use Bokoch\CommissionCalculator\Dto\TransactionData;
 use Bokoch\CommissionCalculator\Exceptions\ExchangeRateNotFoundException;
 
-final readonly class DefaultCommissionCalculator implements CommissionCalculator // TODO: rename
+final readonly class DefaultCommissionCalculator implements CommissionCalculator
 {
     public function __construct(
         private CommissionRateProvider $commissionRateProvider,

@@ -4,6 +4,7 @@ namespace Bokoch\CommissionCalculator;
 
 use Bokoch\CommissionCalculator\CommissionCalculators\CommissionCalculator;
 use Bokoch\CommissionCalculator\CommissionCalculators\DefaultCommissionCalculator;
+use Bokoch\CommissionCalculator\CommissionCalculators\RoundedCentsCommissionCalculator;
 use Bokoch\CommissionCalculator\CommissionRateProviders\CommissionRateProvider;
 use Bokoch\CommissionCalculator\CommissionRateProviders\CountryBasedCommissionRateProvider;
 use Bokoch\CommissionCalculator\ConfigRepositories\ConfigRepository;
@@ -38,6 +39,14 @@ final readonly class App
     public function bootstrap(): void
     {
         $this->container->register(CommissionCalculator::class, function (Container $container): CommissionCalculator {
+//            return new RoundedCentsCommissionCalculator(
+//                new DefaultCommissionCalculator(
+//                    $container->make(CommissionRateProvider::class),
+//                    $container->make(CurrencyExchangeRateProvider::class),
+//                    $container->make(ConfigRepository::class)->get('base_currency'),
+//                )
+//            );
+
             return new DefaultCommissionCalculator(
                 $container->make(CommissionRateProvider::class),
                 $container->make(CurrencyExchangeRateProvider::class),
