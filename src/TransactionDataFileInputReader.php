@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bokoch\CommissionCalculator;
 
 use Bokoch\CommissionCalculator\Dto\TransactionData;
+use InvalidArgumentException;
 
 final readonly class TransactionDataFileInputReader
 {
@@ -14,7 +17,7 @@ final readonly class TransactionDataFileInputReader
     {
         $transactionsContent = @file_get_contents($inputFilePath);
         if ($transactionsContent === false) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('Cannot read transactions data from path: "%s"', $inputFilePath)
             );
         }
@@ -26,7 +29,6 @@ final readonly class TransactionDataFileInputReader
             if (empty($transactionJsonItem)) {
                 continue;
             }
-
 
             $transaction = json_decode($transactionJsonItem, true);
             if ($transaction === null) {

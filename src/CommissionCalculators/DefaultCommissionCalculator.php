@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bokoch\CommissionCalculator\CommissionCalculators;
 
 use Bokoch\CommissionCalculator\CommissionRateProviders\CommissionRateProvider;

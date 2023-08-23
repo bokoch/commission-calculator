@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bokoch\CommissionCalculator\Dto;
 
-readonly class TransactionData
+final readonly class TransactionData
 {
     public function __construct(
         public string $bin,

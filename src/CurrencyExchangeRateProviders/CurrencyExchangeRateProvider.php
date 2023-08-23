@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bokoch\CommissionCalculator\CurrencyExchangeRateProviders;
 
-use Bokoch\CommissionCalculator\Dto\ExchangeRateData;
 use Bokoch\CommissionCalculator\Exceptions\ExchangeRateNotFoundException;
 
 interface CurrencyExchangeRateProvider

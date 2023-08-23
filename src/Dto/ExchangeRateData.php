@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bokoch\CommissionCalculator\Dto;
 
-readonly class ExchangeRateData
+final readonly class ExchangeRateData
 {
     public function __construct(
         public string $baseCurrencyCode,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bokoch\CommissionCalculator\ConfigRepositories;
 
 final readonly class InMemoryConfigRepository implements ConfigRepository
