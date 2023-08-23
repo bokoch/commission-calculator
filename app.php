@@ -9,6 +9,12 @@ $app = new App(
     new AppContainer()
 );
 
-$commissions = $app->calculateCommissions(__DIR__ . '/resources/input.txt');
+$inputFilePath = $argv[1] ?? null;
+
+if (empty($inputFilePath)) {
+    throw new InvalidArgumentException('Input file path is not defined.');
+}
+
+$commissions = $app->calculateCommissions($inputFilePath);
 
 var_dump($commissions);

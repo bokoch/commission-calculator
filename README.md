@@ -105,3 +105,21 @@ Assuming PHP code is in `app.php`, you could run it by this command, output migh
 3. BIN number represents first digits of credit card number. They can be used to resolve country where the card was issued;
 4. We apply different commission rates for EU-issued and non-EU-issued cards;
 5. We calculate all commissions in EUR currency.
+
+# How to run:
+1. Clone repo:
+```bash
+git clone https://github.com/bokoch/commission-calculator.git
+```
+2. Install composer dependencies:
+```bash
+composer install
+```
+3. Run following command in terminal:
+```bash
+php app.php resources/input.txt
+```
+4. Optionally can run tests with:
+```bash
+composer test 
+```
