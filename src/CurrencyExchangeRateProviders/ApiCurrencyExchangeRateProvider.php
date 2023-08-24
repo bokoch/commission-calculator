@@ -12,19 +12,15 @@ use GuzzleHttp\RequestOptions;
 final readonly class ApiCurrencyExchangeRateProvider implements CurrencyExchangeRateProvider
 {
     public function __construct(
-        private string $baseUri,
+        private Client $client,
         private string $accessKey,
     ) {
     }
 
     public function getExchangeRate(string $baseCurrency, string $targetCurrency): float
     {
-        $client = new Client([
-            'base_uri' => $this->baseUri,
-        ]);
-
         try {
-            $response = $client->get('latest', [
+            $response = $this->client->get('latest', [
                 RequestOptions::QUERY => [
                     'access_key' => $this->accessKey,
                     'base' => $baseCurrency,
@@ -42,7 +38,7 @@ final readonly class ApiCurrencyExchangeRateProvider implements CurrencyExchange
             return (float) $responseData['rates'][$targetCurrency];
         } catch (GuzzleException $e) {
             throw new ExchangeRateNotFoundException(
-                sprintf('Failed fetching of exchange rates from "%s"', $this->baseUri),
+                sprintf('Failed fetching of exchange rates from "%s"', $this->client->getConfig('base_uri')),
                 $e->getCode(),
                 $e
             );

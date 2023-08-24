@@ -15,6 +15,7 @@ use Bokoch\CommissionCalculator\CountryCodeProviders\BinListCountryCodeProvider;
 use Bokoch\CommissionCalculator\CountryCodeProviders\CountryCodeProvider;
 use Bokoch\CommissionCalculator\CurrencyExchangeRateProviders\ApiCurrencyExchangeRateProvider;
 use Bokoch\CommissionCalculator\CurrencyExchangeRateProviders\CurrencyExchangeRateProvider;
+use GuzzleHttp\Client;
 
 final readonly class App
 {
@@ -64,13 +65,17 @@ final readonly class App
 
         $this->container->register(CountryCodeProvider::class, function (Container $container): CountryCodeProvider {
             return new BinListCountryCodeProvider(
-                $container->make(ConfigRepository::class)->get('bin_list.base_uri'),
+                new Client([
+                    'base_uri' => $container->make(ConfigRepository::class)->get('bin_list.base_uri'),
+                ]),
             );
         });
 
         $this->container->register(CurrencyExchangeRateProvider::class, function (Container $container): CurrencyExchangeRateProvider {
             return new ApiCurrencyExchangeRateProvider(
-                $container->make(ConfigRepository::class)->get('exchange_rates_api.base_uri'),
+                new Client([
+                    'base_uri' => $container->make(ConfigRepository::class)->get('exchange_rates_api.base_uri'),
+                ]),
                 $container->make(ConfigRepository::class)->get('exchange_rates_api.access_key'),
             );
         });

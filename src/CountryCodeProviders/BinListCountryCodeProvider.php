@@ -11,18 +11,14 @@ use GuzzleHttp\Exception\GuzzleException;
 final readonly class BinListCountryCodeProvider implements CountryCodeProvider
 {
     public function __construct(
-        private string $baseUri,
+        private Client $client,
     ) {
     }
 
     public function getCountryCode(string $bin): string
     {
-        $client = new Client([
-            'base_uri' => $this->baseUri,
-        ]);
-
         try {
-            $response = $client->get($bin);
+            $response = $this->client->get($bin);
 
             $responseData = json_decode($response->getBody()->getContents(), true);
 
@@ -35,7 +31,7 @@ final readonly class BinListCountryCodeProvider implements CountryCodeProvider
             return $responseData['country']['alpha2'];
         } catch (GuzzleException $e) {
             throw new CountryCodeNotFoundException(
-                sprintf('Failed fetching of country code from "%s"', $this->baseUri),
+                sprintf('Failed fetching of country code from "%s"', $this->client->getConfig('base_uri')),
                 $e->getCode(),
                 $e
             );
